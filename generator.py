@@ -1,4 +1,5 @@
 import random, time
+from datetime import datetime
 
 SERVICES = ["auth", "payments", "db"]
 
@@ -10,7 +11,7 @@ def generate_log(is_anomaly=False):
     """
 
     log = {
-        "timestamp": time.time(), # time
+        "timestamp": datetime.fromtimestamp(time.time()).strftime("%H:%M:%S"), # time
         "service": random.choice(SERVICES),
         "latency_milisecs": random.gauss(100, 15), #normal latency is 100ms +- 15ms
         "level": "INFO",  # default log level
