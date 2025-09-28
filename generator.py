@@ -25,3 +25,13 @@ def generate_log(is_anomaly=False):
         log["msg"] = "Service running normally"
 
     return log
+
+if __name__ == "__main__":
+    start = time.time()
+    while True:
+        elapsed = time.time() - start
+
+        anomaly_mode = int(elapsed) % 15 < 5 # every 15 seconds, 5 seconds of anomalies
+        log = generate_log(is_anomaly=anomaly_mode)
+        print(log)
+        time.sleep(0.2)
