@@ -7,11 +7,11 @@ from generator import generate_log
 logs = []
 alerts = []
 
-# Streamlit page setup
+
 st.set_page_config("Log Anomaly Detector", layout="wide")
 st.title("🚨 Log Anomaly Detector")
 
-# Alert box at top
+
 alert_box = st.empty()
 
 # Split into two columns for chart + table
@@ -31,20 +31,20 @@ anomaly_placeholder = metric_col4.empty()
 
 # Main loop simulates log stream
 while True:
-    # Generate log (generator decides if anomaly or not)
+
     log = generate_log()
 
-    # Check anomaly flag directly
+
     if log.get("anomaly", False):
         alerts.append(log)
 
-    # Add to logs
+
     logs.append(log)
 
     # Convert last N logs into a DataFrame (for display)
     df = pd.DataFrame(logs[-5000:])
 
-    # --- Update chart data (no flashing) ---
+
     if not df.empty and "latency_ms" in df.columns:
         chart.add_rows(df[["latency_ms"]].tail(1))  # append new point only
 
