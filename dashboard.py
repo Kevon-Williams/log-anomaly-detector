@@ -17,7 +17,7 @@ alert_box = st.empty()
 # Split into two columns for chart + table
 col1, col2 = st.columns(2)
 
-# --- Create chart once ---
+
 chart = col1.line_chart([])   # left column for chart
 log_table = col2.empty()      # right column for table
 
@@ -51,11 +51,6 @@ while True:
     # Update log table in right column
     log_table.dataframe(df.tail(20))  # show last 20 logs
 
-    # Show alerts if anomalies found
-    if alerts:
-        alert_box.error(f"⚠️ Anomalies detected: {len(alerts)}")
-
-    # --- Insights panel calculations ---
     if not df.empty:
         avg_latency = df["latency_ms"].mean()
         p95_latency = df["latency_ms"].quantile(0.95)
